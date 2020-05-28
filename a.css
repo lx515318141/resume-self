@@ -1,0 +1,818 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #e0e3ed;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0px;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dd,
+dt,
+td{
+  padding: 0px;
+  margin: 0px;
+}
+hr {
+  height: 0;
+  border: none;
+  border-top: 1px solid #dedede;
+}
+@keyframes movedown {
+  from {
+    transform: translateY(-34px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  color: #7494a3;
+}
+[data-x].offset {
+  transform: translateY(100px);
+}
+[data-x] {
+  transform: translateY(0);
+  transition: all 0.5s;
+}
+
+.topNavBar {
+  padding: 20px 0 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.4s;
+  color: #b7b7b7;
+}
+
+.topNavBar.sticky {
+  background: white;
+  padding: 10px 0px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  color: #3d4451;
+  z-index: 1;
+  /* 设置元素的堆叠顺序，数值高的会叠在数值低的元素上面，当两者重叠时会显示在上面 */
+}
+
+.topNavBar-inner {
+  padding: 0 16px 0 16px;
+}
+
+.topNavBar nav {
+  padding-top: 8px;
+}
+
+.topNavBar nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topNavBar nav > ul > li {
+  float: left;
+  margin-left: 17px;
+  margin-right: 17px;
+  position: relative;
+}
+
+.topNavBar nav > ul > li > a {
+  font-size: 12px;
+  color: #1c2c39;
+  /* 继承其父级元素的颜色，inherit意为继承 */
+  font-weight: bold;
+  /* 字体加粗 */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: block;
+  position: relative;
+  border-bottom: 3px solid transparent;
+}
+
+.topNavBar nav > ul > li.active > a::after,
+.topNavBar nav > ul > li.highlight > a::after {
+  content: "";
+  display: ruby;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 25%;
+  background: #1c2c39;
+  animation: menuSlide 0.5s;
+}
+
+@keyframes menuSlide {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.topNavBar .submenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  color: #3d4451;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.topNavBar li.active > .submenu {
+  display: block;
+  animation: submenuSlide 0.5s;
+}
+@keyframes submenuSlide {
+  0% {
+    margin-right: 100%;
+  }
+  /* 这里的margin-right：100%指的是submenu的父级元素的100%，即li的宽度 */
+  100% {
+    margin-right: 0%;
+  }
+}
+
+.topNavBar .submenu > li {
+  white-space: nowrap;
+  /* 不换行 */
+  padding: 5px 10px;
+}
+
+.topNavBar .logo {
+  font-size: 24px;
+  font-family: "Arial Black";
+}
+
+.topNavBar .logo .lx {
+  color: #1c2c39;
+  margin-right: 4px;
+}
+
+.topNavBar .logo .card {
+  color: #b7b7b7;
+}
+
+.banner {
+  height: 515px;
+  /* background: #D6DDDF; */
+  background-image: url(./img/bg2.jpg);
+  background-position: center center;
+  background-size: cover;
+}
+
+.banner .mask {
+  height: 515px;
+  background-color: rgba(250, 250, 250, 0.3);
+}
+
+.userCard {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px 0px;
+}
+
+.userCard .welcome {
+  background-color: #e06567;
+  color: white;
+  display: inline-table;
+  padding: 4px 16px;
+  line-height: 22px;
+  position: relative;
+}
+
+.userCard .welcome .triangle {
+  display: block;
+  border: 10px solid transparent;
+  width: 0;
+  border-top-width: 0;
+  border-left-color: #e06567;
+  position: absolute;
+  left: 5px;
+  top: 100%;
+}
+.userCard .PictureAndText {
+  background: #edf4f6;
+  display: flex;
+  position: relative;
+}
+.userCard .PictureAndText .picture {
+  height: 443px;
+  position: absolute;
+  z-index: 1;
+  padding: 10px;
+}
+.userCard .PictureAndText img {
+  height: 102%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px 0px;
+}
+.userCard .PictureAndText .text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+}
+.userCard .PictureAndText .text h1 {
+  margin-left: 252px;
+  font-size: 60px;
+  color: #1c2c39;
+  font-weight: 500;
+  margin-top: 84px;
+  position: relative;
+  z-index: 2;
+  font-family: Baskerville Old Face;
+}
+.userCard .PictureAndText .text span {
+  position: absolute;
+  color: #1c2c39;
+  top: 126px;
+  left: 654px;
+  font-size: 14px;
+}
+.userCard .PictureAndText .text span::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  border: 1px solid #1c2c39;
+  top: 24px;
+  left: -12px;
+}
+.userCard .PictureAndText .text h1::after {
+  content: "";
+  position: absolute;
+  width: 206px;
+  border: 2px solid #1c2c39;
+  top: 65px;
+  left: 0px;
+}
+.userCard dl {
+  background: #fcfcfc;
+  margin: 0;
+  flex-grow: 1;
+  padding-top: 50px;
+  padding-right: 40px;
+  text-align: right;
+  padding-bottom: 64px;
+}
+.userCard dt {
+  margin: 6px;
+  color: #1c2c39;
+}
+.userCard svg {
+  width: 22px;
+  height: 22px;
+  /* fill: white;
+  vertical-align: top; */
+  margin-left: 4px;
+}
+.introduction {
+  margin-top: -330px;
+}
+
+.downloadResume-warpper {
+  text-align: center;
+  margin: 60px 0;
+}
+.introduction .downloadResume {
+  font-size: 14px;
+  line-height: 16px;
+  padding: 21px 55px;
+  display: inline-block;
+  border: 1px solid #cdcfd1;
+  background: #efefef;
+  border-radius: 4px;
+  color: #3d4451;
+  font-weight: bold;
+  transition: box-shadow 0.2s;
+}
+.introduction .downloadResume:hover {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px 0px;
+}
+
+body .skill {
+  max-width: 782px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  margin-top: 20px;
+  background: #252a41;
+  border-radius: 20px;
+}
+body .skill .overview {
+  width: 50%;
+  padding: 60px 80px;
+}
+body .skill .overview > h2 {
+  font-size: 16px;
+  line-height: 41px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  text-align: left;
+}
+body .skill .overview > span {
+  color: #64677f;
+  font-size: 4px;
+}
+body .skill .overview > p {
+  font-size: 2px;
+  color: white;
+  margin-top: 50px;
+}
+.skill .overview .skillList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.skill .skillList > li {
+  width: 68px;
+  display: inline-block;
+  margin: 2px 4px;
+}
+.skill .skillList > li:nth-child(3n + 1) {
+  margin-left: 0px;
+}
+.skill .skillList > li:nth-child(3n + 0) {
+  margin-right: 0px;
+}
+.skill .skillList > li h3 {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(
+    45deg,
+    rgba(235, 17, 119, 1) 0%,
+    rgba(194, 17, 118, 1) 48%,
+    rgba(194, 17, 118, 1) 50%,
+    rgba(240, 57, 194, 1) 100%
+  );
+  padding: 18px 0;
+  border-radius: 10px;
+}
+.skill .skillList > li:nth-child(2) h3 {
+  background: linear-gradient(
+    45deg,
+    rgba(23, 235, 182, 1) 0%,
+    rgba(35, 116, 237, 1) 100%
+  );
+}
+.skill .skillList > li:nth-child(3) h3 {
+  background: linear-gradient(
+    45deg,
+    rgba(190, 105, 213, 1) 0%,
+    rgba(100, 62, 187, 1) 100%
+  );
+}
+.skill .skillList > li:nth-child(4) h3 {
+  background: linear-gradient(
+    45deg,
+    rgba(113, 68, 237, 1) 0%,
+    rgba(113, 68, 237, 1) 3%,
+    rgba(49, 179, 239, 1) 100%
+  );
+}
+.skill .skillList > li:nth-child(5) h3 {
+  background: linear-gradient(
+    45deg,
+    rgba(248, 186, 115, 1) 0%,
+    rgba(235, 114, 100, 1) 100%
+  );
+}
+.skill .skillList > li:nth-child(6) h3 {
+  background: linear-gradient(
+    45deg,
+    rgba(243, 247, 116, 1) 0%,
+    rgba(135, 235, 101, 1) 100%
+  );
+}
+.skill .skillList > li div {
+  background: #252a41;
+  padding: 6px;
+  border: 2px solid #252a41;
+  border-radius: 14px;
+}
+.skill .skillList > li > div.active {
+  border: 2px solid #c21176;
+}
+.skill .skillList > li:nth-child(2) > div.active {
+  border: 2px solid #1db0d1;
+}
+.skill .skillList > li:nth-child(3) > div.active {
+  border: 2px solid #9153c8;
+}
+.skill .skillList > li:nth-child(4) > div.active {
+  border: 2px solid #5278ee;
+}
+.skill .skillList > li:nth-child(5) > div.active {
+  border: 2px solid #f2966c;
+}
+.skill .skillList > li:nth-child(6) > div.active {
+  border: 2px solid #bdf16c;
+}
+.skill .skillList > li:hover {
+  cursor: pointer;
+}
+.skill .skillList > li span {
+  color: #64677f;
+  font-size: 2px;
+  display: block;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.skill .skillContent {
+  flex-grow: 1;
+  margin: 8px 8px 8px 0;
+  background: #fcfcfc;
+  border-radius: 16px;
+  padding: 42px 48px;
+  max-width: 382px;
+}
+.skill .skillContent .skillTitle h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.skill .skillContent > .skillTitle {
+  margin-bottom: 40px;
+}
+.skill .skillContent > .skillTitle > p {
+  font-family: kaiti;
+  font-size: 12px;
+  line-height: 14px;
+  color: #64677f;
+  margin-top: 10px;
+}
+.skill .skillContent .skillContentList > li {
+  display: flex;
+  margin: 16px 0;
+  align-items: center;
+}
+
+.skill .skillContent .skillContentList > li > span {
+  font-size: 12px;
+  flex-shrink: 152;
+}
+.skill .skillContent .skillContentList > li > svg {
+  margin-right: 10px;
+  width: 14px;
+}
+
+.portfolio {
+  margin: 70px auto;
+  max-width: 930px;
+  text-align: center;
+}
+.portfolio .mySlides h2 {
+  margin-bottom: 32px;
+  color: #1c2c39;
+  font-size: 34px;
+}
+.portfolio .gallery {
+  position: relative;
+}
+.portfolio .gallery .lineBar {
+  position: absolute;
+  height: 71%;
+  width: 4px;
+  background: #a7c4d0;
+  left: calc(50% - 2px);
+  margin-top: 89px;
+}
+.portfolio .gallery .workList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.portfolio .gallery .workList .workWrapper {
+  position: relative;
+  width: 50%;
+}
+.portfolio .gallery .workList .workWrapper span {
+  position: absolute;
+  background: #1c2c39;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  right: -4px;
+  top: 88px;
+}
+.portfolio .gallery .workList .workWrapper:nth-child(even) {
+  margin-top: 50px;
+}
+.portfolio .gallery .workList .workWrapper:nth-child(even) span {
+  left: -4px;
+}
+.portfolio .gallery .workList .workWrapper .workContent {
+  background: #fcfcfc;
+  position: relative;
+  border-width: 5px 0 0 0;
+  border-style: solid;
+  box-shadow: 0px 0px 3px 1px rgba(136, 136, 136, 0.6);
+}
+.portfolio .gallery .workList .workWrapper:nth-child(odd) .workContent {
+  margin-right: 36px;
+}
+.portfolio .gallery .workList .workWrapper:nth-child(even) .workContent {
+  margin-left: 36px;
+}
+.portfolio .gallery .workList .workWrapper:nth-child(odd) .angle {
+  position: absolute;
+  right: -20px;
+  border: 10px solid transparent;
+  border-top-width: 21px;
+  border-bottom-width: 21px;
+  border-left-color: #fcfcfc;
+  top: 66px;
+  background: transparent url(img/arrows.png) center center no-repeat;
+  background-position: -28px, 0;
+}
+.portfolio .gallery .workList .workWrapper:nth-child(even) .angle {
+  position: absolute;
+  left: -20px;
+  border: 10px solid transparent;
+  border-top-width: 21px;
+  border-bottom-width: 21px;
+  border-right-color: #fcfcfc;
+  top: 66px;
+  background: transparent url(img/arrows.png) center center no-repeat;
+  background-position: -3px, 0;
+}
+.portfolio .gallery .workList .workWrapper .workContent .title {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.portfolio .gallery .workList .workWrapper .workContent .text {
+  font-size: 16px;
+  font-family: kaiti;
+  color: #858585;
+  margin-bottom: 8px;
+  text-align: left;
+  margin-left: 10px;
+}
+.portfolio .gallery .workList .workWrapper img {
+  width: 410px;
+}
+.portfolio .gallery .workList .workWrapper .workContent .footer {
+  background: #a7c4d0;
+}
+.portfolio .gallery .workList .workWrapper .workContent button {
+  border: 1px solid #888888;
+  border-radius: 15px;
+  padding: 6px 16px;
+  margin: 15px 60px;
+  box-shadow: 0px 0px 3px 1px rgba(136, 136, 136, 0.6);
+}
+.portfolio .gallery .workList .workWrapper .workContent button:hover {
+  background: #1c2c39;
+  color: #fcfcfc;
+}
+.interest {
+  margin: 0 auto;
+  max-width: 930px;
+}
+.interest .interestWraper {
+  background: #fcfcfc;
+  border: 1px solid #fcfcfc;
+  box-shadow: 0px 1px 3px 1px rgba(102, 102, 102, 0.55);
+  padding: 40px 60px;
+}
+.interest h2 {
+  margin-bottom: 32px;
+  color: #1c2c39;
+  text-align: center;
+  font-size: 34px;
+}
+.interest .interestWraper p {
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: kaiti;
+}
+.interest .interestWraper ul {
+  display: flex;
+  justify-content: center;
+}
+.interest .interestWraper li {
+  position: relative;
+}
+
+.interest .interestWraper li:hover span {
+  transform: translateY(8px);
+  opacity: 1;
+}
+.interest .interestWraper li div {
+  border: 1px solid #d7dbde;
+  padding: 20px;
+  margin: 7px 7px;
+  background: #fcfcfc;
+}
+.interest .interestWraper li svg {
+  width: 32px;
+  height: 32px;
+}
+.interest .interestWraper li span {
+  position: absolute;
+  background: #717171;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 20px;
+  border-radius: 4px;
+  left: 12px;
+  top: 83px;
+  opacity: 0;
+  transition: all 0.4s;
+}
+.experience {
+  margin: 70px auto;
+  max-width: 930px;
+}
+.experience h2 {
+  font-size: 34px;
+  margin-bottom: 32px;
+  color: #1c2c39;
+  text-align: center;
+}
+.experience .experienceWrapper li {
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 3px 0px rgba(136, 136, 136, 0.6);
+}
+.experience .experienceWrapper li h3 {
+  background: #1c2c39;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 16px;
+}
+.experience .experienceWrapper li h3:hover {
+  cursor: pointer;
+}
+.experience .experienceWrapper li div {
+  background: #fcfcfc;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+.experience .experienceWrapper li div.active {
+  height: 144px;
+}
+.experience .experienceWrapper li h4 {
+  font-size: 22px;
+  margin: 30px 30px 10px 30px;
+}
+.experience .experienceWrapper li .time {
+  color: #60727b;
+  font-weight: bold;
+  margin: 0 30px;
+}
+
+.calendar {
+  margin: 0 auto;
+  width: 930px;
+  margin-bottom: 100px;
+}
+.calendar h2 {
+  font-size: 34px;
+  margin-bottom: 32px;
+  color: #1c2c39;
+  text-align: center;
+}
+.calendar .calendarWrapper{
+  box-shadow: 0px 1px 3px 1px rgba(102, 102, 102, 0.55);
+  display: flex;
+  font-family: Microsoft Tai Le;
+}
+.calendar .calendarWrapper .calendarToday{
+  padding: 102px 76px;
+  background: #1c2c39;
+  color: #fff;
+  text-align: center;
+}
+.calendar .calendarWrapper .calendarToday .page{
+  padding: 36px 43px;
+  background: #e06567;
+  border-radius: 10px;
+  font-weight: lighter;
+  /* font-family: Open Sans; */
+  position: relative;
+}
+.calendar .calendarWrapper .calendarToday .page::before,
+.calendar .calendarWrapper .calendarToday .page::after{
+  position: absolute;
+  content: '';
+  background: #fff;
+  width: 3px;
+  height: 12px;
+  border-radius: 40%;
+  top: -6px;
+  left: 52px;
+}
+.calendar .calendarWrapper .calendarToday .page::after{
+  left: 115px;
+}
+.calendar .calendarWrapper .calendarToday .page .day{
+  font-size: 74px;
+  margin-bottom: 8px;
+  line-height: 74px;
+}
+.calendar .calendarWrapper .calendarToday .page .month{
+  font-size: 33px;
+  line-height: 33px;
+
+}
+.calendar .calendarWrapper .calendarToday .weekDay{
+  font-size: 36px;
+  line-height: 36px;
+  margin-top: 43px;
+  font-weight: lighter;
+}
+.calendar .calendarWrapper .calendarContent{
+  background: #fcfcfc;
+  padding: 35px 35px 0 35px;
+  flex-grow: 1;
+}
+.calendar .calendarWrapper .switchingTime{
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+  line-height: 18px;
+  color: #333333;
+  font-size: 17px;
+  font-weight: bold;
+}
+.calendar .calendarWrapper .switchingTime > span{
+  margin: 0 40px;
+}
+.calendar .calendarWrapper .switchingTime > div{
+  
+}
+.calendar .calendarWrapper .switchingTime svg{
+  width: 0.7em;
+  height: 0.7em;
+  margin-bottom: 3px;
+}
+.calendar .calendarWrapper .calendarContent table{
+  width: 100%;
+  line-height: 38px;
+  margin-bottom: 10px;
+  color: #777777;
+}
+.calendar .calendarWrapper .calendarContent tbody td{
+  text-align: center;
+  line-height: 44px;
+  font-size: 16px;
+  padding: 5px 0;
+}
+.calendar .calendarWrapper .calendarContent tbody span{
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 auto;
+  color: #000000;
+}
+.calendar .calendarWrapper .calendarContent tbody span.active{
+  background: #e06567;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+}
+.calendar .calendarWrapper .calendarContent tbody span.x{
+  color: #999;
+}
+.calendar .calendarWrapper .calendarContent .calendarFooter{
+  border-top: 1px solid #e1e1e1;
+  color: #373b42;
+  font-size: 12px;
+  padding: 21px 0 21px 21px;
+}
