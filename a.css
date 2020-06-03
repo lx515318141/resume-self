@@ -38,16 +38,6 @@ hr {
   border: none;
   border-top: 1px solid #dedede;
 }
-@keyframes movedown {
-  from {
-    transform: translateY(-34px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 .icon {
   width: 1em;
   height: 1em;
@@ -56,14 +46,15 @@ hr {
   overflow: hidden;
   color: #7494a3;
 }
-[data-x].offset {
-  transform: translateY(100px);
-}
-[data-x] {
-  transform: translateY(0);
-  transition: all 0.5s;
-}
 
+html.sr #siteSkills,
+html.sr #siteAbout,
+html.sr #calendar,
+html.sr #hobby,
+html.sr #experience,
+html.sr .workList > div {
+  visibility: hidden;
+}
 .topNavBar {
   padding: 20px 0 20px 0;
   position: fixed;
@@ -79,7 +70,7 @@ hr {
   padding: 10px 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   color: #3d4451;
-  z-index: 1;
+  z-index: 3;
   /* 设置元素的堆叠顺序，数值高的会叠在数值低的元素上面，当两者重叠时会显示在上面 */
 }
 
@@ -110,14 +101,20 @@ hr {
   /* 继承其父级元素的颜色，inherit意为继承 */
   font-weight: bold;
   /* 字体加粗 */
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 2px;
   display: block;
   position: relative;
   border-bottom: 3px solid transparent;
 }
-
-.topNavBar nav > ul > li.active > a::after,
+@keyframes menuSlide {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.topNavBar nav > ul > li:hover > a::after,
 .topNavBar nav > ul > li.highlight > a::after {
   content: "";
   display: ruby;
@@ -126,18 +123,9 @@ hr {
   left: 0;
   width: 100%;
   height: 3px;
-  border-radius: 25%;
+  border-radius: 1px;
   background: #1c2c39;
   animation: menuSlide 0.5s;
-}
-
-@keyframes menuSlide {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
 }
 
 .topNavBar .submenu {
@@ -149,10 +137,6 @@ hr {
   color: #3d4451;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-.topNavBar li.active > .submenu {
-  display: block;
-  animation: submenuSlide 0.5s;
-}
 @keyframes submenuSlide {
   0% {
     margin-right: 100%;
@@ -162,6 +146,11 @@ hr {
     margin-right: 0%;
   }
 }
+.topNavBar li.active > .submenu {
+  display: block;
+  animation: submenuSlide 0.5s;
+}
+
 
 .topNavBar .submenu > li {
   white-space: nowrap;
@@ -293,8 +282,6 @@ hr {
 .userCard svg {
   width: 22px;
   height: 22px;
-  /* fill: white;
-  vertical-align: top; */
   margin-left: 4px;
 }
 .introduction {
@@ -326,7 +313,7 @@ body .skill {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  margin-top: 20px;
+  margin-top: 40px;
   background: #252a41;
   border-radius: 20px;
 }
@@ -490,7 +477,7 @@ body .skill .overview > p {
 }
 
 .portfolio {
-  margin: 70px auto;
+  margin: 100px auto;
   max-width: 930px;
   text-align: center;
 }
@@ -515,11 +502,11 @@ body .skill .overview > p {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.portfolio .gallery .workList .workWrapper {
+.portfolio .gallery .workList > div{
   position: relative;
   width: 50%;
 }
-.portfolio .gallery .workList .workWrapper span {
+.portfolio .gallery .workList > div span {
   position: absolute;
   background: #1c2c39;
   width: 8px;
@@ -528,26 +515,26 @@ body .skill .overview > p {
   right: -4px;
   top: 88px;
 }
-.portfolio .gallery .workList .workWrapper:nth-child(even) {
+.portfolio .gallery .workList .even {
   margin-top: 50px;
 }
-.portfolio .gallery .workList .workWrapper:nth-child(even) span {
+.portfolio .gallery .workList .even span {
   left: -4px;
 }
-.portfolio .gallery .workList .workWrapper .workContent {
+.portfolio .gallery .workList .workContent {
   background: #fcfcfc;
   position: relative;
   border-width: 5px 0 0 0;
   border-style: solid;
   box-shadow: 0px 0px 3px 1px rgba(136, 136, 136, 0.6);
 }
-.portfolio .gallery .workList .workWrapper:nth-child(odd) .workContent {
+.portfolio .gallery .workList .odd .workContent {
   margin-right: 36px;
 }
-.portfolio .gallery .workList .workWrapper:nth-child(even) .workContent {
+.portfolio .gallery .workList .even .workContent {
   margin-left: 36px;
 }
-.portfolio .gallery .workList .workWrapper:nth-child(odd) .angle {
+.portfolio .gallery .workList .odd .angle {
   position: absolute;
   right: -20px;
   border: 10px solid transparent;
@@ -558,7 +545,7 @@ body .skill .overview > p {
   background: transparent url(img/arrows.png) center center no-repeat;
   background-position: -28px, 0;
 }
-.portfolio .gallery .workList .workWrapper:nth-child(even) .angle {
+.portfolio .gallery .workList .even .angle {
   position: absolute;
   left: -20px;
   border: 10px solid transparent;
@@ -569,12 +556,12 @@ body .skill .overview > p {
   background: transparent url(img/arrows.png) center center no-repeat;
   background-position: -3px, 0;
 }
-.portfolio .gallery .workList .workWrapper .workContent .title {
+.portfolio .gallery .workList .workContent .title {
   font-size: 22px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.portfolio .gallery .workList .workWrapper .workContent .text {
+.portfolio .gallery .workList .workContent .text {
   font-size: 16px;
   font-family: kaiti;
   color: #858585;
@@ -582,67 +569,68 @@ body .skill .overview > p {
   text-align: left;
   margin-left: 10px;
 }
-.portfolio .gallery .workList .workWrapper img {
+.portfolio .gallery .workList img {
   width: 410px;
 }
-.portfolio .gallery .workList .workWrapper .workContent .footer {
+.portfolio .gallery .workList .workContent .footer {
   background: #a7c4d0;
 }
-.portfolio .gallery .workList .workWrapper .workContent button {
+.portfolio .gallery .workList .workContent button {
   border: 1px solid #888888;
   border-radius: 15px;
   padding: 6px 16px;
   margin: 15px 60px;
   box-shadow: 0px 0px 3px 1px rgba(136, 136, 136, 0.6);
 }
-.portfolio .gallery .workList .workWrapper .workContent button:hover {
+.portfolio .gallery .workList .workContent button:hover {
   background: #1c2c39;
   color: #fcfcfc;
 }
-.interest {
+
+.hobby {
   margin: 0 auto;
   max-width: 930px;
 }
-.interest .interestWraper {
+.hobby .hobbytWrapper {
   background: #fcfcfc;
   border: 1px solid #fcfcfc;
   box-shadow: 0px 1px 3px 1px rgba(102, 102, 102, 0.55);
   padding: 40px 60px;
 }
-.interest h2 {
+.hobby h2 {
   margin-bottom: 32px;
   color: #1c2c39;
   text-align: center;
   font-size: 34px;
 }
-.interest .interestWraper p {
+.hobby .hobbytWrapper p {
   margin-bottom: 40px;
   text-align: center;
   font-family: kaiti;
 }
-.interest .interestWraper ul {
+.hobby .hobbytWrapper ul {
   display: flex;
   justify-content: center;
 }
-.interest .interestWraper li {
+.hobby .hobbytWrapper li {
   position: relative;
 }
 
-.interest .interestWraper li:hover span {
+.hobby .hobbytWrapper li:hover span {
   transform: translateY(8px);
   opacity: 1;
 }
-.interest .interestWraper li div {
+.hobby .hobbytWrapper li div {
   border: 1px solid #d7dbde;
   padding: 20px;
   margin: 7px 7px;
   background: #fcfcfc;
 }
-.interest .interestWraper li svg {
+.hobby .hobbytWrapper li svg {
   width: 32px;
   height: 32px;
 }
-.interest .interestWraper li span {
+.hobby .hobbytWrapper li span {
   position: absolute;
   background: #717171;
   color: #fff;
@@ -654,8 +642,9 @@ body .skill .overview > p {
   opacity: 0;
   transition: all 0.4s;
 }
+
 .experience {
-  margin: 70px auto;
+  margin: 100px auto 230px auto;
   max-width: 930px;
 }
 .experience h2 {
@@ -815,4 +804,6 @@ body .skill .overview > p {
   color: #373b42;
   font-size: 12px;
   padding: 21px 0 21px 21px;
+  position: relative;
+  top: 48px;
 }

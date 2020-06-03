@@ -1,29 +1,36 @@
-!function(){
-  var view = View("#topNavBar");
-  var controller = Controller({
-    init: function(view){
-      this.bindEvents()
-    },
-    bindEvents: function(){
-      var view = this.view
-      window.addEventListener("scroll", (x) => {
-        // 监听屏幕滑动
-        // 箭头函数没有this，所有箭头函数内外this不变
-        if (window.scrollY > 0) {
-          //window.scrollY：文档从顶部开始滚动过的像素值
-          this.active()
-          // 给topNavBar的class添加sticky
-        } else {
-          this.deactive()
-        }
-      });
+{
+  let view = {
+    el: '#topNavBar',
+    init(){
+      this.$el = $(this.el)
     },
     active: function(){
-      this.view.classList.add('sticky')
+      this.$el.addClass('sticky')
     },
     deactive: function(){
-      this.view.classList.remove('sticky')
+      this.$el.removeClass('sticky')
     }
-  })
-  controller.init(view);
-}.call();
+  };
+  let contreller = {
+    init(view){
+      this.view = view
+      this.view.init()
+      this.bindEvents()
+    },
+    bindEvents(){
+      window.addEventListener('scroll', (e) => {
+        // 监听屏幕滑动
+        // 箭头函数没有this，所有箭头函数内外this不变
+        if(window.scrollY > 0){
+          //window.scrollY：文档从顶部开始滚动过的像素值
+          this.view.active()
+          // 给topNavBar的class添加sticky
+        }else{
+          this.view.deactive()
+        }
+      })
+    }
+    
+  }
+  contreller.init(view)
+}

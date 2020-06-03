@@ -4,10 +4,9 @@
     <title>我的简历</title>
 
     <script src="//at.alicdn.com/t/font_1434436_o7fcxswz9ai.js"></script>
-    <style type="text/css">
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 
-    </style>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> -->
     <link rel="stylesheet" href="./a.css">
 </head>
 
@@ -28,31 +27,20 @@
                     <li>
                         <a href="#siteSkills">技 能</a>
                     </li>
-                    <li class="menuTigger">
+                    <li>
                         <a href="#siteWorks">作 品</a>
-                        <ul class="submenu">
-                            <li>作品1</li>
-                            <li>作品2</li>
-                            <li>作品3</li>
-                        </ul>
                     </li>
-                    <li class="menuTigger">
+                    <li>
                         <a href="#">博 客</a>
-                        <!-- menuTigger的意思为触发一个菜单 -->
-                        <ul class="submenu">
-                            <li>博客1</li>
-                            <li>博客2</li>
-                            <li>博客3</li>
-                        </ul>
                     </li>
                     <li>
-                        <a href="#">日 历</a>
+                        <a href="#calendar">日 历</a>
                     </li>
                     <li>
-                        <a href="#">联 系 方 式</a>
+                        <a href="#hobby">兴 趣 爱 好</a>
                     </li>
                     <li>
-                        <a href="#">其 他</a>
+                        <a href="#experience">经 历</a>
                     </li>
                 </ul>
             </nav>
@@ -69,7 +57,6 @@
                 </div>
                 <div class="text">
                     <h1>Li Xiang</h1>
-                    <!-- <p>前端开发工程师，熟悉HTML5/CSS3/JavaScript/Vue</p> -->
                     <span>前端工程师</span>
                     <dl>
                         <dt>
@@ -78,12 +65,6 @@
                                 <use xlink:href="#icon-xingming"></use>
                             </svg>
                         </dt>
-                        <!-- <dt>
-                            28
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-rili"></use>
-                            </svg>
-                        </dt> -->
                         <dt>
                             lixiang4163
                             <svg class="icon" aria-hidden="true">
@@ -221,7 +202,7 @@
                 <div class="lineBar">
                 </div>
                 <div class="workList">
-                    <div class="workWrapper">
+                    <div class="odd one">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
@@ -234,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="workWrapper">
+                    <div class="even two">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
@@ -247,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="workWrapper">
+                    <div class="odd three">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
@@ -260,11 +241,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="workWrapper">
+                    <div class="even four">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
-                            <p class="title">太极</p>
+                            <p class="title">旋转太极</p>
                             <img src="./img/works/canvas.jpg" alt="">
                             <p class="text">使用技术：</p>
                             <div class="footer">
@@ -273,7 +254,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="workWrapper">
+                    <div class="odd five">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
@@ -286,11 +267,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="workWrapper">
+                    <div class="even six">
                         <span></span>
                         <div class="workContent">
                             <div class="angle"></div>
-                            <p class="title">皮卡丘</p>
+                            <p class="title">自动画皮卡丘</p>
                             <img src="./img/works/canvas.jpg" alt="">
                             <p class="text">使用技术：</p>
                             <div class="footer">
@@ -303,14 +284,63 @@
             </div>
         </div>
     </section>
-    <section class="interest">
+    <section data-x class="calendar" id="calendar">
+        <h2>日历</h2>
+        <div class="calendarWrapper">
+            <div class="calendarToday">
+                <div class="page">
+                    <p class="day" id="day">26</p>
+                    <p class="month" id="engMonth">May</p>
+                </div>
+                <div class="weekDay" id="week">Monday</div>
+            </div>
+            <div class="calendarContent">
+                <div class="switchingTime">
+                    <div>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-jiantou1-z"></use>
+                        </svg>
+                    </div>
+                    <span>
+                        <span id="year">2020</span>
+                        <span id="chMonth">五月</span>
+                    </span>
+                    <div>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-jiantou1-y"></use>
+                        </svg>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>一</th>
+                            <th>二</th>
+                            <th>三</th>
+                            <th>四</th>
+                            <th>五</th>
+                            <th>六</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                <div class="calendarFooter">
+                    愿你无远虑，亦无近忧。
+                </div>
+            </div>
+        </div>
+    </section>
+    <section data-x class="hobby" id="hobby">
         <h2>兴趣爱好</h2>
-        <div class="interestWraper">
+        <div class="hobbytWrapper">
             <p>
                 无氧的器械训练可以增强我的力量和骨骼肌；游泳等有氧运动可以强化我的心肺功能，让我整个人更有活力，让我保持年轻；射箭能让我心情平静，让我更加沉稳；骑行能让我在繁忙的都市中看到些不一样的风景，让我看到更广阔的世界。闲暇时看看电影，阅读书籍，能让我放松自己，丰富我的阅历，让我体验不一样的人生。<br>
                 如果你也有和我一样的爱好，那么，我们是朋友了。
             </p>
-            <ul class="interestList">
+            <ul class="hobbyList">
                 <li>
                     <div>
                         <svg class="icon" aria-hidden="true">
@@ -362,7 +392,8 @@
             </ul>
         </div>
     </section>
-    <section class="experience">
+    
+    <section data-x class="experience" id="experience">
         <h2>教育及工作经历</h2>
         <div class="experienceWrapper">
             <ul>
@@ -393,68 +424,21 @@
             </ul>
         </div>
     </section>
-    <section class="calendar">
-        <h2>日历</h2>
-        <div class="calendarWrapper">
-            <div class="calendarToday">
-                <div class="page">
-                    <p class="day" id="day">26</p>
-                    <p class="month" id="engMonth">May</p>
-                </div>
-                <div class="weekDay" id="week">Monday</div>
-            </div>
-            <div class="calendarContent">
-                <div class="switchingTime">
-                    <div>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-jiantou1-z"></use>
-                        </svg>
-                    </div>
-                    <span>
-                        <span id="year">2020</span>
-                        <span id="chMonth">五月</span>
-                    </span>
-                    <div>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-jiantou1-y"></use>
-                        </svg>
-                    </div>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>日</th>
-                            <th>一</th>
-                            <th>二</th>
-                            <th>三</th>
-                            <th>四</th>
-                            <th>五</th>
-                            <th>六</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-                <div class="calendarFooter">
-                    愿你无远虑，亦无近忧。
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/tween.js/17.1.1/Tween.min.js"></script>
     <script src="./js/tab.js"></script>
     <script src="./js/upflod.js"></script>
     <script src="./js/calendar.js"></script>
+    <script src="./js/sticky_topbar.js"></script>
+    <script src="./js/smoothly_navigation.js"></script>
+    <script src="./js/auto_slide_up.js"></script>
     <!-- <script src="https://cdn.bootcss.com/tween.js/17.1.1/Tween.min.js"></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-    <script src="./js/base/View.js"></script>
-    <script src="./js/base/Controller.js"></script>
-
     <script src="./js/init_swiper.js"></script>
-    <script src="./js/auto_slide_up.js"></script>
-    <script src="./js/sticky_topbar.js"></script>
-    <script src="./js/smoothly_navigation.js"></script> -->
+    
+    
+     -->
 
 </body>
 
