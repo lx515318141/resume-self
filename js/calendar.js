@@ -12,7 +12,6 @@
         </td>
     `,
     render(data) {
-      console.log(data)
       let dateList = data[0];
       let today = data[1];
       let i = 0;
@@ -20,7 +19,9 @@
       while (i < dateList.length) {
         newArrary.push(dateList.slice(i, (i += 7)));
       }
+      this.$el.find("tbody").empty();
       newArrary.forEach((week, index) => {
+        
         let $tr = $(`<tr id=${index}></tr>`);
         this.$el.find("tbody").append($tr);
         week.forEach((day) => {
@@ -33,24 +34,23 @@
           this.$el.find(`tr#${index}`).append($td);
         });
       });
-      for (let key in today) {
-        this.$el.find(`#${key}`).text(today[key]);
+      let calendarTitle = dateList[dateList.length - 15];
+      for (let key in calendarTitle) {
+        this.$el.find(`#${key}`).text(calendarTitle[key]);
       }
       dateList.forEach((day) => {
         let date = day.date + "";
-        if(day.date < 10){
-          date = '0' + date;
+        if (day.date < 10) {
+          date = "0" + date;
         }
-        let day_enMounth = day.enMonth.slice(0,3)
-        // console.log(date)
-        // console.log(today.day)
-        // console.log(day_enMounth)
-        // console.log(today.engMonth)
-        if (date === today.day && day_enMounth === today.engMonth) {
-          console.log('11111111111111111111111111111111')
-          this.$el.find(`#${day.enMonth}-${day.date} > span`).addClass("active");
+        let day_enMounth = day.enMonth.slice(0, 3);
+        // console.log(dateList)
+        if (date === today.day && day_enMounth === today.engMonth && day.year === today.year) {
+          this.$el
+            .find(`#${day.enMonth}-${day.date} > span`)
+            .addClass("active");
         }
-        if (day_enMounth !== today.engMonth) {
+        if (day_enMounth === today.engMonth && day.year === today.year) {
           this.$el.find(`td[id^=${day.enMonth}]`).children().addClass("x");
         }
       });
@@ -117,6 +117,7 @@
     },
     setDateList(today) {
       return new Promise((resolve, reject) => {
+        this.data.dateList = []
         let currentMonthDays = this.getOneMonthDays(today.year, today.numMonth);
         let firstDayInCurentMonth = this.getDayOfWeek(
           today.year,
@@ -127,11 +128,11 @@
         if (firstDayInCurentMonth !== 0) {
           // 先判断本月是不是1月，如果是1月，则上个月就是去年的12月
           let isPreMonth = today.numMonth === 0;
-          let preMonth = isPreMonth ? 12 : today.numMonth - 1;
-          let preYear = isPreMonth ? today.year - 1 : today.year;
+          let preMonth = isPreMonth ? 11 : today.numMonth - 1;
+          let preYear = isPreMonth ? today.year - 1 + '' : today.year;
           // 获取上个月一共多少天
           let preMonthDays = this.getOneMonthDays(preYear, preMonth);
-          for (let i = firstDayInCurentMonth - 1; i >= 0; i--) {
+          for (let i = firstDayInCurentMonth - 1 ; i >= 0; i--) {
             let indexP = this.getDayOfWeek(preYear, preMonth, preMonthDays - i);
             this.data.dateList.push(
               this.setDateListItem({
@@ -175,10 +176,10 @@
           }
         }
         // return { dateList: this.data.dateList, today: this.data.today };
-        if(this.data.dateList.length !== 0){
-          resolve([this.data.dateList, this.data.today])
+        if (this.data.dateList.length !== 0) {
+          resolve([this.data.dateList, this.data.today]);
         }
-      })
+      });
     },
     // 获取当前月份有多少天，此时第二个参数应该为正常月份，即5月就是5，所有month需要加一
     getOneMonthDays(year, month) {
@@ -209,7 +210,29 @@
       });
       this.bindEvent();
     },
-    bindEvent() {},
+    bindEvent() {
+      let changeMonth = {};
+      Object.assign(changeMonth, this.model.data.today);
+      this.view.$el.find(".switchingTime").on("click", "div", (e) => {
+        if (e.currentTarget.className === "left") {
+          if(changeMonth.numMonth === 0){
+            changeMonth.year = changeMonth.year - 1 + ''
+            changeMonth.numMonth = 11
+          }else{
+            changeMonth.numMonth = changeMonth.numMonth - 1;
+          }
+        } else {
+          if(changeMonth.numMonth === 11){
+            changeMonth.year = + changeMonth.year + 1 + ''
+            changeMonth.numMonth = 0
+          }else{
+            changeMonth.numMonth = changeMonth.numMonth + 1;
+          }
+        }
+        this.model.setDateList(changeMonth).then((data) => {
+          this.view.render(data);})
+      });
+    },
   };
   controller.init(view, model);
 }

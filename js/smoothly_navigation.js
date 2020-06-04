@@ -37,7 +37,7 @@
     scrollToElement(element) {
       //得到该元素顶端距离页面顶端的距离top，注意是距离页面顶端，不是距离窗口顶端，这个top值是固定值
       let top = element.offset().top;
-      // window.scrollY 指页面划过的距离，即窗口顶部到页面顶部的距离
+      // $(window).scrollY 指页面划过的距离，即窗口顶部到页面顶部的距离
       let currentTop = $(window).scrollTop();
       // 让window滑动到X方向不变，Y方向top减80
       let targetTop = top - 80;

@@ -4,8 +4,10 @@
     <title>我的简历</title>
 
     <script src="//at.alicdn.com/t/font_1434436_o7fcxswz9ai.js"></script>
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-
+    <!-- <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script> -->
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/wow/1.1.2/wow.min.js"></script>
+    
     <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> -->
     <link rel="stylesheet" href="./a.css">
 </head>
@@ -50,7 +52,7 @@
         <div class="mask"></div>
     </div>
     <main class="introduction">
-        <div data-x class="userCard" id="siteAbout">
+        <div data-x class="userCard wow fadeInUp" id="siteAbout" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
             <div class="PictureAndText">
                 <div class="picture"">
                     <img src=" ./img/avatar1.jpg" width="299" height="347" alt="头像">
@@ -103,7 +105,7 @@
             <a class="downloadResume" href="./img/resume.pdf" target="_block" download>DOWNLOAD RESUME</a>
         </p>
     </main>
-    <section data-x id="siteSkills" class="skill">
+    <section data-x id="siteSkills" class="skill wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
         <div class="overview">
             <h2>专业技能</h2>
             <span>以下是我目前掌握的专业技能，目前仍在跟进学习，并努力掌握更多技能</span>
@@ -204,7 +206,7 @@
                 <div class="workList">
                     <div class="odd one">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow fadeInLeft" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">会动的简历</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -217,7 +219,7 @@
                     </div>
                     <div class="even two">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow fadeInRight" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">轮播</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -230,7 +232,7 @@
                     </div>
                     <div class="odd three">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow fadeInLeft" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">百度搜索框</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -243,7 +245,7 @@
                     </div>
                     <div class="even four">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow fadeInRight" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">旋转太极</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -256,7 +258,7 @@
                     </div>
                     <div class="odd five">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow fadeInLeft" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">按钮</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -269,7 +271,7 @@
                     </div>
                     <div class="even six">
                         <span></span>
-                        <div class="workContent">
+                        <div class="workContent wow slideInRight" class="portfolio" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
                             <div class="angle"></div>
                             <p class="title">自动画皮卡丘</p>
                             <img src="./img/works/canvas.jpg" alt="">
@@ -284,7 +286,7 @@
             </div>
         </div>
     </section>
-    <section data-x class="calendar" id="calendar">
+    <section data-x class="calendar wow fadeInUp" id="calendar" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
         <h2>日历</h2>
         <div class="calendarWrapper">
             <div class="calendarToday">
@@ -296,16 +298,16 @@
             </div>
             <div class="calendarContent">
                 <div class="switchingTime">
-                    <div>
+                    <div class="left">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-jiantou1-z"></use>
                         </svg>
                     </div>
                     <span>
-                        <span id="year">2020</span>
-                        <span id="chMonth">五月</span>
+                        <span id="year"></span>
+                        <span id="cnMonth"></span>
                     </span>
-                    <div>
+                    <div class="right">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-jiantou1-y"></use>
                         </svg>
@@ -333,7 +335,7 @@
             </div>
         </div>
     </section>
-    <section data-x class="hobby" id="hobby">
+    <section data-x class="hobby  wow fadeInUp" id="hobby" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
         <h2>兴趣爱好</h2>
         <div class="hobbytWrapper">
             <p>
@@ -393,7 +395,7 @@
         </div>
     </section>
     
-    <section data-x class="experience" id="experience">
+    <section data-x class="experience wow fadeInUp" id="experience" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="200" data-wow-iteration="1">
         <h2>教育及工作经历</h2>
         <div class="experienceWrapper">
             <ul>

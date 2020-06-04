@@ -1,254 +1,137 @@
-// 获取某月有多少天
-function getOneMonthDays(year, month) {
-    return new Date(year, month, 0).getDate();
-  }
-  // 获取某天是星期几
-  function getDayOfWeek(year, month, day) {
-    return new Date(year, month - 1, day).getDay();
-  }
-  
-  // 生成日期数组
-  // 这个用来填充日期列表
-  function setDateListItem({ year, month, date, dateTableIndex }) {
-    return {
-      dateStamp: `${year}/${month}/${date}`,
-      date,
-      cnWeek: dateTable.cnWeek[dateTableIndex],
-      cnWeekShort: dateTable.cnWeekShort[dateTableIndex],
-      enWeek: dateTable.enWeek[dateTableIndex],
-      enMonth: dateTable.enMonth[month - 1],
-    };
-  }
-  // 日期数组中每一项的内容
-  const dateTable = {
-    cnWeek: [
-      "星期日",
-      "星期一",
-      "星期二",
-      "星期三",
-      "星期四",
-      "星期五",
-      "星期六",
-    ],
-    cnWeekShort: ["日", "一", "二", "三", "四", "五", "六"],
-    enWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    enMonth: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
-  };
-  
-  // 设置日期数组
-  function setDateList(year, month) {
-    // 本月多少天
-    const currentMonthDays = getOneMonthDays(year, month);
-    // 本月第一天是星期几
-    const firstDayInCurrentMonth = getDayOfWeek(year, month, 1);
-    const dateList = [];
-  
-    /*
-        如果当前月不是从星期日开始，从上个月补全，因为
-        我是从周日开始，getDay也是从0开始到6，所以这里判断
-        当前月的第一天不是0，也就是不是周日，那么它前面就需要
-        补上个月的日期。
-      */
-    if (firstDayInCurrentMonth !== 0) {
-      // 这里要判断1月的情况，1月的上个月就成去年的12月了
-      // 判断本月是否是1月
-      const isPrveYear = month - 1 === 0;
-      // 如果是1月前一个月就是12月，如果不是月数减一
-      const prevMonth = isPrveYear ? 12 : month - 1;
-      // 如果是1月，前一个月就是去年的，年份减一，如果不是就是本年
-      const currentYear = isPrveYear ? year - 1 : year;
-      // 获取上一个月的天数
-      const prveMonthDays = getOneMonthDays(currentYear, prevMonth);
-      // 这里是补上个月的，所以从上个月的最后开始补
-      for (let i = firstDayInCurrentMonth - 1; i >= 0; i -= 1) {
-        const index = getDayOfWeek(currentYear, prevMonth, prveMonthDays - i);
-        dateList.push(
-          setDateListItem({
-            year: currentYear,
-            month: prevMonth,
-            date: prveMonthDays - i,
-            dateTableIndex: index,
-          })
-        );
-      }
-    }
-  
-    // 当月日期添加，这里就没什么好说的，直接循环就行了
-    for (let i = 0; i < currentMonthDays; i += 1) {
-      const index = getDayOfWeek(year, month, 1 + i);
-      dateList.push(
-        setDateListItem({
-          year,
-          month,
-          date: i + 1,
-          dateTableIndex: index,
-        })
-      );
-    }
-  
-    const currentDateListLen = dateList.length;
-    /*
-      当月结束时未填满整个行, 这里用了余数来判断，因为有时候是35个，
-      有时候是42个，所以只要前面的日期数组余7不等于0，那么证明没有
-      填满，需要下个月的天数来补
-      */
-    if (currentDateListLen % 7) {
-      const total = currentDateListLen + (7 - (currentDateListLen % 7));
-      const diff = total - currentDateListLen;
-      const isNextYear = month + 1 > 12;
-      const nextMonth = isNextYear ? 1 : month + 1;
-      const currentYear = isNextYear ? year + 1 : year;
-      for (let i = 0; i < diff; i += 1) {
-        const index = getDayOfWeek(currentYear, nextMonth, 1 + i);
-        dateList.push(
-          setDateListItem({
-            year: currentYear,
-            month: nextMonth,
-            date: i + 1,
-            dateTableIndex: index,
-          })
-        );
-      }
-    }
-  
-    return dateList;
-  }
-
 {
-    data: {
-        dateList: [],
-        dateTable: {
-          enWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          enMonth: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-          ],
-        }
-      },
-      getCalendar() {
-        let date = Date();
-        let today = date.split(" ");
-        let [ weekday, month, day, year ] = today;
-        month = new Date().getMonth();
-        console.log(weekday, month, day, year);
-        this.setDateList(year, month)
+  let view = {
+    el: "body",
+    init() {
+      this.$el = $(this.el);
+    },
+    activeItem(li) {
+      // 再把最近的元素加上highlight状态
+      li.addClass("highlight");
+      // 遍历a标签自己及其全部兄弟元素，将他们都移除highlight状态
+      li.siblings().removeClass("highlight");
+    },
+    scrollreveal(id) {
+      // console.log(id);
+      if (id.indexOf(" ") === -1) {
+        let up = {
+          duration: 500,
+          distance: "200px",
+          easing: "ease-out",
+          cleanup: true
+        };
+        ScrollReveal().destroy(`#${id}`);
+        ScrollReveal().reveal(`#${id}`, up);
+        this.$el.find(`#${id}`).addClass("offset");
         
-      },
-      setDateList(year, month) {
-          // 本月多少天
-          let currentMonthDays = this.getOneMonthDays(year, month);
-          // 本月第一天是星期几
-          let firstDayInCurrentMonth = this.getDayOfWeek(year, month, 1);
-        
-          /*
-              如果当前月不是从星期日开始，从上个月补全，因为
-              我是从周日开始，getDay也是从0开始到6，所以这里判断
-              当前月的第一天不是0，也就是不是周日，那么它前面就需要
-              补上个月的日期。
-            */
-          if (firstDayInCurrentMonth !== 0) {
-            // 这里要判断1月的情况，1月的上个月就成去年的12月了
-            // 判断本月是否是1月
-            const isPrveYear = month - 1 === 0;
-            // 如果是1月前一个月就是12月，如果不是月数减一
-            const prevMonth = isPrveYear ? 12 : month - 1;
-            // 如果是1月，前一个月就是去年的，年份减一，如果不是就是本年
-            const currentYear = isPrveYear ? year - 1 : year;
-            // 获取上一个月的天数
-            const prveMonthDays = this.getOneMonthDays(currentYear, prevMonth);
-            // 这里是补上个月的，所以从上个月的最后开始补
-            for (let i = firstDayInCurrentMonth - 1; i >= 0; i -= 1) {
-              const index = this.getDayOfWeek(currentYear, prevMonth, prveMonthDays - i);
-              this.data.dateList.push(
-                this.setDateListItem({
-                  year: currentYear,
-                  month: prevMonth,
-                  date: prveMonthDays - i,
-                  dateTableIndex: index,
-                })
-              );
-            }
+      } else {
+        let classList = id.split(" ");
+          if (classList[0] === "even") {
+            let left = {
+              duration: 500,
+              distance: "100px",
+              easing: "ease-out",
+              origin: "right",
+              cleanup: true
+            };
+            ScrollReveal().destroy(`.${classList[1]}`, left);
+            ScrollReveal().reveal(`.${classList[1]}`, left);
+            this.$el.find(`.${classList[1]}`).addClass("offset");
+          } else {
+            let right = {
+              duration: 500,
+              distance: "100px",
+              easing: "ease-out",
+              origin: "left",
+              cleanup: true
+            };
+            ScrollReveal().destroy(`.${classList[1]}`, right);
+            ScrollReveal().reveal(`.${classList[1]}`, right);
+            this.$el.find(`.${classList[1]}`).addClass("offset");
           }
         
-          // 当月日期添加，这里就没什么好说的，直接循环就行了
-          for (let i = 0; i < currentMonthDays; i += 1) {
-            const index = this.getDayOfWeek(year, month, 1 + i);
-            this.data.dateList.push(
-              this.setDateListItem({
-                year,
-                month,
-                date: i + 1,
-                dateTableIndex: index,
-              })
-            );
-          }
         
-          const currentDateListLen = this.data.dateList.length;
-          /*
-            当月结束时未填满整个行, 这里用了余数来判断，因为有时候是35个，
-            有时候是42个，所以只要前面的日期数组余7不等于0，那么证明没有
-            填满，需要下个月的天数来补
-            */
-          if (currentDateListLen % 7) {
-            const total = currentDateListLen + (7 - (currentDateListLen % 7));
-            const diff = total - currentDateListLen;
-            const isNextYear = month + 1 > 12;
-            const nextMonth = isNextYear ? 1 : month + 1;
-            const currentYear = isNextYear ? year + 1 : year;
-            for (let i = 0; i < diff; i += 1) {
-              const index = this.getDayOfWeek(currentYear, nextMonth, 1 + i);
-              this.data.dateList.push(
-                this.setDateListItem({
-                  year: currentYear,
-                  month: nextMonth,
-                  date: i + 1,
-                  dateTableIndex: index,
-                })
-              );
-            }
-          }
-          console.log(this.data.dateList)
-          // return this.data.dateList;
-      },
-      // 获取某月有多少天
-      getOneMonthDays(year, month) {
-          return new Date(year, month, 0).getDate();
-      },
-      // 获取某天是星期几
-      getDayOfWeek(year, month, day) {
-      return new Date(year, month - 1, day).getDay();
-      },
-      setDateListItem({ year, month, date, dateTableIndex }) {
-          return {
-            dateStamp: `${year}/${month}/${date}`,
-            date,
-          //   cnWeek: this.data.dateTable.cnWeek[dateTableIndex],
-          //   cnWeekShort: this.data.dateTable.cnWeekShort[dateTableIndex],
-            enWeek: this.data.dateTable.enWeek[dateTableIndex],
-            enMonth: this.data.dateTable.enMonth[month - 1],
-          };
       }
+    },
+  };
+  let controller = {
+    init(view) {
+      this.view = view;
+      this.view.init();
+      this.bindEvents();
+      let card = "siteAbout";
+      this.view.scrollreveal(card);
+    },
+    bindEvents() {
+      wow = new WOW(
+        {
+            boxClass: 'wow',      // 默认属性名
+            animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
+            offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
+            mobile: true,       // 是否在移动设备中开启动画
+            live: true        // 持续监测页面中是否插入新的wow元素
+        }
+    );
+    wow.init();
+
+      window.addEventListener('scroll', () => {
+        // 找到所有有data-x的元素
+        let specialTags = this.view.$el.find("[data-x]");
+        // 遍历这些元素
+        for (var i = 0; i < specialTags.length; i++) {
+          let isMidline =
+            $(window).height() / 2 >= specialTags[i].offsetTop - window.scrollY;
+          let id = specialTags[i].id;
+          if (isMidline) {
+            // 通过和这个ID同名的href，找到a标签，这里ID是一个变量
+            let a = this.view.$el.find(`a[href="#${id}"]`);
+            // 找到a标签的父级元素
+            let li = a.parent("li");
+            // 找到li下所有子元素，包括a标签自己
+            this.view.activeItem(li);
+          }
+          this.findOverBottom(specialTags[i], id);
+        }
+      }) 
+    },
+    // 寻找顶部超过窗口底部30px的元素
+    findOverBottom(target, id) {
+      // 找到元素顶部超出窗口底部30px以上的元素
+      // $(window).height()为窗口高度；target.offsetTop元素到页面顶部距离，是个固定值；
+      // window.scrollY，窗口划过的距离，即窗口顶部到页面顶部的距离
+      let $height = $(window).height() - (target.offsetTop - window.scrollY);
+      if ($height > 100 && target.getBoundingClientRect().bottom > 0) {
+        if (id === "siteWorks") {
+          let works = this.view.$el.find(`#siteWorks .workList > div`);
+          for (let j = 0; j < works.length; j++) {
+            let workParity = works[j].getAttribute("class");
+            if(workParity.indexOf('offset') === -1){
+              let $height_small =
+                $(window).height() - works[j].getBoundingClientRect().top;
+              if ($height_small > 100){
+                this.view.scrollreveal(workParity);
+              }
+            }
+            // let isShow_small = this.view.$el.find(`.${workParity}`).hasClass("offset");
+            // console.log(this.view.$el
+            //   .find(`.${workParity}`))
+            // console.log(workParity);
+            // console.log(isShow_small);
+            // if (!isShow_small) {
+            //   let $height_small =
+            //     $(window).height() - works[j].getBoundingClientRect().top;
+            //   if ($height_small > 100){
+            //     this.view.scrollreveal(workParity);
+            //   }
+            // }
+          }
+        } else {
+          let isShow = this.view.$el.find(`#${id}`).hasClass("offset");
+          if (!isShow) {
+            this.view.scrollreveal(id);
+          }
+        }
+      }
+    },
+  };
+  controller.init(view);
 }

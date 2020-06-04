@@ -46,15 +46,6 @@ hr {
   overflow: hidden;
   color: #7494a3;
 }
-
-html.sr #siteSkills,
-html.sr #siteAbout,
-html.sr #calendar,
-html.sr #hobby,
-html.sr #experience,
-html.sr .workList > div {
-  visibility: hidden;
-}
 .topNavBar {
   padding: 20px 0 20px 0;
   position: fixed;
@@ -186,7 +177,7 @@ html.sr .workList > div {
 }
 
 .userCard {
-  max-width: 780px;
+  width: 780px;
   margin-left: auto;
   margin-right: auto;
   background-color: #ffffff;
@@ -309,7 +300,7 @@ html.sr .workList > div {
 }
 
 body .skill {
-  max-width: 782px;
+  width: 782px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -445,7 +436,7 @@ body .skill .overview > p {
   background: #fcfcfc;
   border-radius: 16px;
   padding: 42px 48px;
-  max-width: 382px;
+  width: 382px;
 }
 .skill .skillContent .skillTitle h2 {
   font-size: 20px;
@@ -478,7 +469,7 @@ body .skill .overview > p {
 
 .portfolio {
   margin: 100px auto;
-  max-width: 930px;
+  width: 930px;
   text-align: center;
 }
 .portfolio .mySlides h2 {
@@ -589,7 +580,7 @@ body .skill .overview > p {
 
 .hobby {
   margin: 0 auto;
-  max-width: 930px;
+  width: 930px;
 }
 .hobby .hobbytWrapper {
   background: #fcfcfc;
@@ -645,7 +636,7 @@ body .skill .overview > p {
 
 .experience {
   margin: 100px auto 230px auto;
-  max-width: 930px;
+  width: 930px;
 }
 .experience h2 {
   font-size: 34px;
@@ -775,6 +766,7 @@ body .skill .overview > p {
   line-height: 38px;
   margin-bottom: 10px;
   color: #777777;
+  height: 332px;
 }
 .calendar .calendarWrapper .calendarContent tbody td{
   text-align: center;
@@ -788,6 +780,10 @@ body .skill .overview > p {
   height: 36px;
   line-height: 36px;
   margin: 0 auto;
+  color: #999;
+  
+}
+.calendar .calendarWrapper .calendarContent tbody span.x{
   color: #000000;
 }
 .calendar .calendarWrapper .calendarContent tbody span.active{
@@ -796,14 +792,10 @@ body .skill .overview > p {
   color: #fff;
   font-weight: bold;
 }
-.calendar .calendarWrapper .calendarContent tbody span.x{
-  color: #999;
-}
+
 .calendar .calendarWrapper .calendarContent .calendarFooter{
   border-top: 1px solid #e1e1e1;
   color: #373b42;
   font-size: 12px;
   padding: 21px 0 21px 21px;
-  position: relative;
-  top: 48px;
 }
