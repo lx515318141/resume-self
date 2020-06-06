@@ -62,7 +62,7 @@ hr {
   padding: 10px 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   color: #3d4451;
-  z-index: 3;
+  z-index: 100;
   /* 设置元素的堆叠顺序，数值高的会叠在数值低的元素上面，当两者重叠时会显示在上面 */
 }
 .topNavBar-inner {
@@ -596,14 +596,6 @@ hr {
   background: #fcfcfc;
   position: relative;
 }
-.blog .swiper-container{
-  /* background: #fcfcfc; */
-  
-}
-.blog .swiper-container .swiper-wrapper{
-  /* padding-left: 25px;
-  padding-right: 110px; */
-}
 .blog .swiper-container .swiper-wrapper .swiper-slide{
   padding: 55px 75px 40px 107px;
   color: #757575;
@@ -646,14 +638,17 @@ hr {
   /* position: static; */
   top: 25px;
   right: 25px;
+  /* 设置swiper按钮的大小 */
   --swiper-navigation-size: 10px;
 }
 .blog .blog-box > .swiper-button-prev{
   top: 90px;
   left: 850px;
 }
-.blog .swiper-nav > div::after{
-  /* content: ''; */
+.blog .blog-box > .swiper-button-prev:focus,
+.blog .blog-box > .swiper-button-next:focus{
+  /* 取出swiper前进和后退按钮点击时出现的边框 */
+  outline: none;
 }
 .blog .swiper-nav .icon{
   color: #3e4452;

@@ -19,6 +19,9 @@
       while (i < dateList.length) {
         newArrary.push(dateList.slice(i, (i += 7)));
       }
+      for (let key in today) {
+        this.$el.find(`.calendarToday #${key}`).text(today[key]);
+      }
       this.$el.find("tbody").empty();
       newArrary.forEach((week, index) => {
         
@@ -34,9 +37,10 @@
           this.$el.find(`tr#${index}`).append($td);
         });
       });
+
       let calendarTitle = dateList[dateList.length - 15];
       for (let key in calendarTitle) {
-        this.$el.find(`#${key}`).text(calendarTitle[key]);
+        this.$el.find(`.calendarTitle #${key}`).text(calendarTitle[key]);
       }
       dateList.forEach((day) => {
         let date = day.date + "";

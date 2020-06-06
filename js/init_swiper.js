@@ -22,6 +22,9 @@
         prevEl: ".swiper-button-prev"
       },
       autoplay:true,
+      autoplay: {
+        disableOnInteraction: false,
+      },
     },
     initSwiper(){
       this.swiper = new Swiper(
