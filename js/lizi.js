@@ -74,23 +74,22 @@
     wow.init();
 
       window.addEventListener('scroll', () => {
-        // 找到所有有data-x的元素
-        let specialTags = this.view.$el.find("[data-x]");
-        // 遍历这些元素
-        for (var i = 0; i < specialTags.length; i++) {
-          let isMidline =
-            $(window).height() / 2 >= specialTags[i].offsetTop - window.scrollY;
-          let id = specialTags[i].id;
-          if (isMidline) {
-            // 通过和这个ID同名的href，找到a标签，这里ID是一个变量
-            let a = this.view.$el.find(`a[href="#${id}"]`);
-            // 找到a标签的父级元素
-            let li = a.parent("li");
-            // 找到li下所有子元素，包括a标签自己
-            this.view.activeItem(li);
-          }
-          this.findOverBottom(specialTags[i], id);
-        }
+         // 找到所有有data-x的元素
+         let specialTags = this.view.$el.find("[data-x]");
+         // 遍历这些元素
+         for (var i = 0; i < specialTags.length; i++) {
+           if (specialTags[i].getBoundingClientRect().top <= $(window).height() / 2 && specialTags[i].getBoundingClientRect().top >= 0) {
+             // 通过和这个ID同名的href，找到a标签，这里ID是一个变量
+             let a = this.view.$el.find(`a[href="#${id}"]`);
+             // 找到a标签的父级元素li
+             let target = a.parent("li");
+             if (target.attr('class') !== 'highlight') {
+               this.view.activeItem(target);
+             }
+           }
+           let id = specialTags[i].id;
+           this.findOverBottom(specialTags[i], id);
+         }
       }) 
     },
     // 寻找顶部超过窗口底部30px的元素
@@ -135,3 +134,86 @@
   };
   controller.init(view);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /* 博客 */
+// .blog{
+//   width: 930px;
+//   margin: 100px auto;
+//   text-align: center;
+// }
+// .blog h2{
+//   font-size: 34px;
+//   margin-bottom: 32px;
+//   color: #1c2c39;
+// }
+// .blog .swiper-container{
+//   position: relative;
+//   background: #fcfcfc;
+//   box-shadow: 0px 1px 3px 1px rgba(102, 102, 102, 0.55);
+// }
+// .blog .swiper-container .swiper-wrapper{
+//   /* padding-left: 25px;
+//   padding-right: 110px; */
+// }
+// .blog .swiper-container .swiper-wrapper .swiper-slide{
+//   padding: 55px 180px 40px 100px;
+//   color: #757575;
+//   text-align: left;
+//   position: relative;
+// }
+// .blog .swiper-container .swiper-wrapper .swiper-slide .mark{
+//   position: absolute;
+//   left: 20px;
+//   top: 50px;
+// }
+// .blog .swiper-container .swiper-wrapper .swiper-slide svg{
+//   width: 40px;
+//   height: 40px;
+  
+// }
+// .blog .swiper-container .swiper-wrapper .blogTitle{
+//   border-bottom: 1px solid #dddad9;
+//   padding-bottom: 25px;
+  
+//   font-size: 20px;
+//   font-weight: bold;
+// }
+// .blog .swiper-container .swiper-wrapper .bolgInfo{
+//   margin-top: 25px;
+// }
+// .blog .swiper-nav{
+//   position: absolute;
+//   top: 25px;
+//   right: 25px;
+//   color: #3e4452;
+// }
+// .blog .swiper-nav > div{
+//   padding: 18px 21px 19px 21px;
+//   border: 1px solid #d7dbde;
+//   margin: 10px auto;
+//   color: #3e4452;
+//   size: 14px;
+//   position: static;
+//   display: block;
+//   --swiper-navigation-size: none;
+// }
+// .blog .swiper-nav > div::after{
+//   content: '';
+// }
+// .blog .swiper-nav .icon{
+//   color: #3e4452;
+// }
