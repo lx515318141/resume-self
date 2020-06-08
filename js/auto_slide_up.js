@@ -5,12 +5,8 @@
       this.$el = $(this.el);
     },
     activeItem(li) {
-      // let $li = $(li)
-      // let $li = $(li)
-      // 再把最近的元素加上highlight状态
+      // 找到li为其添加class，并去除其兄弟元素的class
       li.addClass("highlight").siblings().removeClass("highlight");
-      // 遍历a标签自己及其全部兄弟元素，将他们都移除highlight状态
-      // li.siblings().removeClass("highlight");
     },
   };
   let controller = {

@@ -21,14 +21,6 @@
     bindEvents() {
       // 监听屏幕滑动
       window.addEventListener("scroll", (e) => {
-        // // 箭头函数没有this，所有箭头函数内外this不变
-        // if (window.scrollY > 0) {
-        //   //window.scrollY：文档从顶部开始滚动过的像素值
-        //   this.view.active();
-        //   // 给topNavBar的class添加sticky
-        // } else {
-        //   this.view.deactive();
-        // }
         this.sticky()
       });
     },

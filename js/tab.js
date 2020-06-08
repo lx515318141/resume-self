@@ -16,7 +16,6 @@
       this.$el.find('.skillTitle > p').text(data[1])
       this.$el.find('ol.skillContentList').empty()
       for(let i=2; i<data.length; i++){
-        console.log(data[i])
         $li = $(this.template.replace("{{skillText}}", data[i]))
         this.$el.find('ol.skillContentList').append($li)
       }
@@ -88,7 +87,6 @@
       this.view.$el.on("click", "li", (e) => {
         this.view.activeItem(e.currentTarget);
         let name = e.currentTarget.lastElementChild.innerText
-        console.log(this.model.data[name])
         this.view.render(this.model.data[name])
       });
     },

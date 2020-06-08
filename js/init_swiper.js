@@ -21,7 +21,9 @@
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"
       },
+      // 轮播是否自动播放
       autoplay:true,
+      // 当认为点击前进后退按钮时，是否停止自动播放
       autoplay: {
         disableOnInteraction: false,
       },
@@ -35,30 +37,4 @@
   }
   controll.init(view)
 }
-// !function(){
-//   var view = View("#blog");
 
-//   var controller = Controller({
-//     init: function(view) {
-//       this.initSwiper();
-//     },
-//     swiper: null,
-//     swiperOptions: {
-//       loop: true,
-//       pagination: {
-//         el: ".swiper-pagination"
-//       },
-//       navigation: {
-//         nextEl: ".swiper-button-next",
-//         prevEl: ".swiper-button-prev"
-//       }
-//     },
-//     initSwiper: function() {
-//       this.swiper = new Swiper(
-//         this.view.querySelector(".swiper-container"),
-//         this.swiperOptions
-//       );
-//     }
-//   });
-//   controller.init(view);
-// }.call();
