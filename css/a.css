@@ -562,23 +562,41 @@ hr {
 }
 .portfolio .gallery .workList img {
   width: 410px;
+  border: 1px solid #999;
 }
 .portfolio .gallery .workList .workContent .footer {
   background: #a7c4d0;
 }
-.portfolio .gallery .workList .workContent button {
+.portfolio .gallery .workList .workContent a{
+  display: inline-block;
+  font-size: 13px;
   border: 1px solid #888888;
   border-radius: 15px;
   padding: 6px 16px;
   margin: 15px 60px;
   box-shadow: 0px 0px 3px 1px rgba(136, 136, 136, 0.6);
+  background: rgb(239,239,239);
 }
-.portfolio .gallery .workList .workContent button:focus{
-  outline: none;
-}
-.portfolio .gallery .workList .workContent button:hover {
+.portfolio .gallery .workList .workContent a:hover{
   background: #1c2c39;
   color: #fcfcfc;
+}
+.portfolio .gallery .workList .workContent .cookie{
+  position: relative;
+}
+.portfolio .gallery .workList .workContent .cookie::after{
+  content: '无法预览';
+  position: absolute;
+  font-size: 12px;
+  color: #444;
+  background: rgba(0,0,0,0.2);
+  padding: 2px;
+  top: 4px;
+  left: -56px;
+  display: none;
+}
+.portfolio .gallery .workList .workContent .cookie:hover::after{
+  display: inline-block;
 }
 
 /* 博客 */
